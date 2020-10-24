@@ -1,6 +1,6 @@
-#Struct-map
+# Struct-map
 
-###Problem 
+### Problem 
 I'm working on a project where we use redis.
 I have encountered a problem with values that redis returns.
 Redis returns map[string]interface{} and then you need to assign values yourself.
