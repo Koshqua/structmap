@@ -39,3 +39,7 @@ func RegisterValue(val reflect.Value) error{
 	}
 	return nil
 }
+
+func GetValueFromMap(key string) (interface{}, bool){
+	return StructMapping.Load(key)
+}

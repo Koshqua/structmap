@@ -6,7 +6,7 @@ import (
 )
 
 type TestStruct struct{
-	SomeStr string
+	SomeStr string `structmap:"some_str"`
 	SomeInt int64 `structmap:"some_int"`
 }
 func TestRegister(t *testing.T) {
@@ -51,4 +51,23 @@ func TestRegister(t *testing.T) {
 			t.Fatalf("expected value to be %v, got %v", "some_int", valStr)
 		}
 	})
+}
+
+func TestDecode(t *testing.T) {
+	testMap := make(map[string]interface{},0)
+	testMap["some_int"] = int64(1)
+	testMap["some_str"] = "something else"
+	testStruct := TestStruct{}
+	err := Decode(testMap, &testStruct)
+	if err != nil {
+		t.Errorf("didn't expect to get error, got %v", err)
+	}
+	if testStruct.SomeInt != 1 {
+		t.Errorf("expected value of testStruct SomeInt to become %v, got %v", 1, testStruct.SomeInt)
+	}
+	if testStruct.SomeStr != "something else"{
+		t.Errorf("expected value of testStruct SomeStr to become %v, got %v", "something else", testStruct.SomeStr)
+	}
+
+
 }
